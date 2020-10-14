@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Quotation;
 use App\Models\Insurance;
 use App\Models\Instruct;
-use App\Models\Insured;
+use App\Models\Client;
+use App\Models\CoverType;
+use App\Models\Currency;
+use App\Models\AuthorizeSign;
+use PDF;
 
 class InstructCoverController extends Controller
 {
@@ -15,6 +19,12 @@ class InstructCoverController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         //
@@ -56,13 +66,16 @@ class InstructCoverController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    
     public function show($id)
     {
         //
-        $instruct = Instruct::findOrFail($id);
+        $item = Instruct::findOrFail($id);
 
-        return view('pages.instruct.show')->with([
-            'instruct' => $instruct
+        $authorizes = AuthorizeSign::all();
+        return view ('pages.instruct.show')->with([
+            'item'=>$item,
+            'authorizes' => $authorizes
         ]);
     }
 
@@ -75,6 +88,19 @@ class InstructCoverController extends Controller
     public function edit($id)
     {
         //
+        $insurances = Insurance::all();
+        $clients = Client::all();
+        $covertypes = CoverType::all();
+        $currencies = Currency::all();
+        $item = Instruct::findOrFail($id);
+
+        return view('pages.instruct.edit')->with([
+            'item' => $item,
+            'insurances' => $insurances,
+            'clients' => $clients,
+            'covertypes' => $covertypes,
+            'currencies'=> $currencies
+        ]);
     }
 
     /**
@@ -87,6 +113,11 @@ class InstructCoverController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data = $request->all();
+        $item = Instruct::findOrFail($id);
+        $item->update($data);
+
+        return redirect()->route('instruct.index');
     }
 
     /**
@@ -108,5 +139,27 @@ class InstructCoverController extends Controller
         return view('pages.instruct.create')->with([
             'item' => $item,
         ]);
+    }
+
+    public function setStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:UNAPPROVED,APPROVED,REJECTED'
+        ]);
+
+        $item = Intruct::findOrFail($id);
+        $item->status = $request->status;
+
+        $item->save();
+
+        return redirect()->route('instruct.index');
+    }
+
+    public function print($id)
+    {
+        $instruct = Instruct::findOrFail($id);
+
+        $pdf = PDF::loadView('pages.instruct.print', compact('instruct'))->setPaper('a4', 'portrait');
+        return $pdf->stream();
     }
 }

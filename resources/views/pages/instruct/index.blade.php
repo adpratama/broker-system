@@ -54,8 +54,8 @@
                      
                            <td>{{$item->id}} </td>
                            <td>{{$item->date}}</td>
-                           <td>{{$item->insurance_id}}</td>
-                           <td>{{$item->client_id }}</td>
+                           <td>{{$item->insurance->name}}</td>
+                           <td>{{$item->client->name }}</td>
                            <td>
                                  
                               @if($item->status == 'UNAPPROVED')
@@ -98,20 +98,20 @@
                                  <div class="dropdown-menu dropdown-menu-right" 
                                     aria-labelledby="dr1">
                                     @if($item->status == 'UNAPPROVED')
-                                    <a href="{{ route('placing.status', $item->id) }}?status=APPROVED" 
+                                    <a href="{{ route('instruct.status', $item->id) }}?status=APPROVED" 
                                        class="dropdown-item ">
                                        <i class="fe fe-check"></i>
                                        APPROVE
                                     </a>
 
-                                    <a href="{{ route('placing.status', $item->id) }}?status=REJECTED" 
+                                    <a href="{{ route('instruct.status', $item->id) }}?status=REJECTED" 
                                        class="dropdown-item">                                                     
                                        <i class="fe fe-x"></i>
                                        REJECT
                                     </a>
                                     
                                     <a class="dropdown-item " 
-                                       href="{{route('quotation.edit', $item->id)}} ">
+                                       href="{{route('instruct.edit', $item->id)}} ">
                                        <i class="fe fe-edit"></i>
                                        Edit
                                     </a>
@@ -119,17 +119,17 @@
 
                                  @if ($item->status == 'DRAFT')
                                     <a class="dropdown-item " 
-                                       href="{{route('quotation.edit', $item->id)}} ">
+                                       href="{{route('instruct.edit', $item->id)}} ">
                                        <i class="fe fe-edit"></i>
                                        Edit
                                     </a>
                                     <a 
                                        href="#mymodal"
-                                       data-remote="{{ route('quotation.show', $item->id)}}" 
+                                       data-remote="{{ route('instruct.show', $item->id)}}" 
                                        class="dropdown-item" 
                                        data-toggle="modal" 
                                        data-target="#mymodal" 
-                                       data-title="Quotation Slip No. {{ $item->id}}">
+                                       data-title="Instruct Cover No. {{ $item->id}}">
                                        Publish
                                     </a>
                                  @endif
@@ -140,7 +140,8 @@
                                        Create Instruct Cover
                                     </a>
                                     <a class="dropdown-item " 
-                                       href="{{route('placing.show', $item->id)}} ">
+                                       target="_blank"
+                                       href="{{route('instruct.print', $item->id)}} ">
                                        <i class="fe fe-file-text"></i>
                                        Cetak
                                     </a>

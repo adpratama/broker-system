@@ -11,7 +11,7 @@
                </div>
 
                <div class="card-body">
-                  <form action="{{ route('quotation.update', $item->id) }}" 
+                  <form action="{{ route('instruct.update', $item->id) }}" 
                      method="POST">
                      @csrf
                      @method('PATCH')

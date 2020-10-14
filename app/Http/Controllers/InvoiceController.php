@@ -21,6 +21,12 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $items = Invoice::with('quotation.insurance', 'quotation.client')->get();
@@ -162,14 +168,15 @@ class InvoiceController extends Controller
             'quotation.client', 
             'quotation.currency',
             'quotation.covertype'])->findOrFail($id);
-        
 
-        $pdf = PDF::loadView('pages.invoice.print', compact('invoice'), ['format' =>'A4-P']);
+            $html = '<h1>Hello HTML</h1>';
+
+            // $pdf = PDF::loadHTMl($html);
+        $pdf = PDF::loadView('pages.invoice.print', compact('invoice'))->setPaper('a4', 'portrait');
+        // $pdf->setOption('enable-javascript', true);
+        // $pdf->setOption('enable-smart-shrinking', true);
+        // $pdf->setOption('no-stop-slow-scripts', true);
         return $pdf->stream();
-
-        // return view('pages.invoice.print')->with([
-        //     'invoice' => $invoice
-        // ]);
     }
 
     public function output()

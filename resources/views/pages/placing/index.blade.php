@@ -176,12 +176,13 @@
                                  @endif
 
                                  @if ($item->status == 'APPROVED')
-                                    <a href="{{route('quotation.ic', $item->id)}} " 
+                                    <a href="{{route('quotation.qs', $item->id)}} " 
                                        class="dropdown-item ">
                                        Create Quotation
                                     </a>
                                     <a class="dropdown-item " 
-                                       href="{{route('placing.show', $item->id)}} ">
+                                       target="_blank"
+                                       href="{{route('placing.print', $item->id)}} ">
                                        <i class="fe fe-file-text"></i>
                                        Cetak
                                     </a>

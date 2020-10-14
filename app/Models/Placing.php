@@ -23,7 +23,8 @@ class Placing extends Model
         'rate',
         'sum_insured',
         'premi',
-        'content'
+        'content',
+        'signfor'
     ];
 
     public function insurance()
@@ -44,5 +45,10 @@ class Placing extends Model
     public function currency()
     {
         return $this->belongsTo(Currency::class, 'currency_id', 'input_kode');
+    }
+
+    public function authorize()
+    {
+        return $this->belongsTo(AuthorizeSign::class, 'signfor', 'input_kode');
     }
 }

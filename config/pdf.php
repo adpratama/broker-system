@@ -1,3 +1,5 @@
+<?php 
+
 return [
 	'mode'                 => '',
 	'format'               => 'A4',

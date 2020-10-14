@@ -9,6 +9,8 @@ use App\Models\Insurance;
 use App\Models\Client;
 use App\Models\CoverType;
 use App\Models\Currency;
+use App\Models\AuthorizeSign;
+use PDF;
 
 
 class QuotationSlipController extends Controller
@@ -18,6 +20,12 @@ class QuotationSlipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         //
@@ -74,10 +82,11 @@ class QuotationSlipController extends Controller
     {
         //
         $item = Quotation::findOrFail($id);
-        // ->with('insureds')->get();
 
-        return view('pages.quotation.show')->with([
-            'item' => $item
+        $authorizes = AuthorizeSign::all();
+        return view ('pages.quotation.show')->with([
+            'item'=>$item,
+            'authorizes' => $authorizes
         ]);
     }
 
@@ -142,5 +151,27 @@ class QuotationSlipController extends Controller
             'item'=>$item,
             // 'insureds'=>$insureds
         ]);
+    }
+
+    public function setStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:UNAPPROVED,APPROVED,REJECTED'
+        ]);
+
+        $item = Quotation::findOrFail($id);
+        $item->status = $request->status;
+
+        $item->save();
+
+        return redirect()->route('quotation.index');
+    }
+
+    public function print($id)
+    {
+        $quotation = Quotation::findOrFail($id);
+
+        $pdf = PDF::loadView('pages.quotation.print', compact('quotation'))->setPaper('a4', 'portrait');
+        return $pdf->stream();
     }
 }

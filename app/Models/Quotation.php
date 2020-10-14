@@ -20,7 +20,8 @@ class Quotation extends Model
         'rate',
         'sum_insured',
         'premi',
-        'content'
+        'content',
+        'signfor'
     ];
 
     public function insurance()
@@ -46,5 +47,10 @@ class Quotation extends Model
     public function invoices()
     {
         return $this->hasMany(Invoice::class, 'quotation_id');
+    }
+
+    public function authorize()
+    {
+        return $this->belongsTo(AuthorizeSign::class, 'signfor', 'input_kode');
     }
 }

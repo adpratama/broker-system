@@ -8,6 +8,8 @@ use App\Models\Insurance;
 use App\Models\Client;
 use App\Models\CoverType;
 use App\Models\Currency;
+use App\Models\AuthorizeSign;
+use PDF;
 
 class PlacingSlipController extends Controller
 {
@@ -77,8 +79,10 @@ class PlacingSlipController extends Controller
         //
         $item = Placing::findOrFail($id);
 
+        $authorizes = AuthorizeSign::all();
         return view ('pages.placing.show')->with([
-            'item'=>$item
+            'item'=>$item,
+            'authorizes' => $authorizes
         ]);
     }
 
@@ -163,5 +167,11 @@ class PlacingSlipController extends Controller
         ]);
     }
 
-    
+    public function print($id)
+    {
+        $placing = Placing::findOrFail($id);
+
+        $pdf = PDF::loadView('pages.placing.print', compact('placing'))->setPaper('a4', 'portrait');
+        return $pdf->stream();
+    }
 }

@@ -98,13 +98,13 @@
                                  <div class="dropdown-menu dropdown-menu-right" 
                                     aria-labelledby="dr1">
                                     @if($item->status == 'UNAPPROVED')
-                                    <a href="{{ route('placing.status', $item->id) }}?status=APPROVED" 
+                                    <a href="{{ route('quotation.status', $item->id) }}?status=APPROVED" 
                                        class="dropdown-item ">
                                        <i class="fe fe-check"></i>
                                        APPROVE
                                     </a>
 
-                                    <a href="{{ route('placing.status', $item->id) }}?status=REJECTED" 
+                                    <a href="{{ route('quotation.status', $item->id) }}?status=REJECTED" 
                                        class="dropdown-item">                                                     
                                        <i class="fe fe-x"></i>
                                        REJECT
@@ -144,7 +144,8 @@
                                        Create Invoice
                                     </a>
                                     <a class="dropdown-item " 
-                                       href="{{route('placing.show', $item->id)}} ">
+                                       target="_blank"
+                                       href="{{route('quotation.print', $item->id)}} ">
                                        <i class="fe fe-file-text"></i>
                                        Cetak
                                     </a>

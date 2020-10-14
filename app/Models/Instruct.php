@@ -28,12 +28,32 @@ class Instruct extends Model
 
     public function insurance()
     {
-        return $this->belongsTo(Insurance::class, 'insurance_id', 'id');
+        return $this->belongsTo(Insurance::class, 'insurance_id', 'id');        
     }
 
-    public function insureds()
+    public function client()
     {
-        return $this->belongsTo(Insured::class, 'insured_id', 'id');
+        return $this->belongsTo(Client::class, 'client_id', 'id');
+    }
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class, 'currency_id', 'input_kode');
+    }
+
+    public function covertype() 
+    {
+        return $this->belongsTo(CoverType::class, 'cover_type_id', 'input_kode');
+    }
+    
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class, 'quotation_id');
+    }
+
+    public function authorize()
+    {
+        return $this->belongsTo(AuthorizeSign::class, 'signfor', 'input_kode');
     }
 }
 

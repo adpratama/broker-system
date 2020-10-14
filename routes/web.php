@@ -2,17 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -34,16 +23,21 @@ Route::resource('account', 'AccountController');
 Route::resource('placing', 'PlacingSlipController');
 Route::get('placing/{id}/makeps', 'PlacingSlipController@makeps')->name('placing.makeps');
 Route::get('placing/{id}/set-status', 'PlacingSlipController@setStatus')->name('placing.status');
+Route::get('placing/{id}/print', 'PlacingSlipController@print')->name('placing.print');
+
 
 // Quotation Slip
 Route::resource('quotation', 'QuotationSlipController');
 Route::get('quotation/{id}/qs', 'QuotationSlipController@qs')->name('quotation.qs');
 Route::get('quotation/{id}/set-status', 'QuotationSlipController@setStatus')->name('quotation.status');
-
+Route::get('quotation/{id}/print', 'QuotationSlipController@print')->name('quotation.print');
 
 // Instruct Cover
 Route::resource('instruct', 'InstructCoverController');
 Route::get('instruct/{id}/ic', 'InstructCoverController@create_ic')->name('instruct.ic');
+Route::get('instruct/{id}/set-status', 'InstructCoverController@setStatus')->name('instruct.status');
+Route::get('instruct/{id}/print', 'InstructCoverController@print')->name('instruct.print');
+
 // Invoice
 Route::resource('invoice', 'InvoiceController');
 Route::get('invoice/{id}/invoice', 'InvoiceController@create_invoice')->name('invoice.make');
