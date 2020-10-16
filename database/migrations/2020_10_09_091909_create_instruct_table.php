@@ -15,9 +15,10 @@ class CreateInstructTable extends Migration
     {
         Schema::create('instructs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('status');
             $table->date('date')->nullable();
             $table->string('insurance_id');
-            $table->string('insured_id');
+            $table->string('client_id');
             $table->date('period_from');
             $table->date('period_to');
             $table->string('cover_type_id');
@@ -30,6 +31,7 @@ class CreateInstructTable extends Migration
             $table->integer('kurs');
             $table->integer('admin_fee');
             $table->longText('content');
+            $table->string('signfor');
             $table->softDeletes();
             $table->timestamps();
         });

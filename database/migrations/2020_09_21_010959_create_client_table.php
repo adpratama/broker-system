@@ -17,6 +17,8 @@ class CreateClientTable extends Migration
             $table->string('id');
             $table->string('name');
             $table->string('address');
+            $table->string('kota');
+            $table->string('provinsi');
             $table->string('phone');
             $table->string('email');
             $table->string('pic');

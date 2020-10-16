@@ -19,10 +19,13 @@ class CreateInvoiceTable extends Migration
             $table->date('date')->nullable();
             $table->string('quotation_id');
             $table->string('policy_number');
+            $table->integer('kurs');
             $table->integer('policy_cost');
             $table->integer('stamp_duty');
             $table->integer('others');
+            $table->float('admin_cost');
             $table->longText('particulars');
+            $table->string('signfor');
             $table->softDeletes();
             $table->timestamps();
         });

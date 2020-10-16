@@ -15,9 +15,10 @@ class CreatePlacingTable extends Migration
     {
         Schema::create('placings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('status');
             $table->date('date')->nullable();
             $table->string('insurance_id');
-            $table->string('insured_id');
+            $table->string('client_id');
             $table->date('period_from');
             $table->date('period_to');
             $table->string('cover_type_id');
@@ -28,6 +29,7 @@ class CreatePlacingTable extends Migration
             $table->integer('sum_insured');
             $table->integer('premi');
             $table->longText('content');
+            $table->string('signfor');
             $table->softDeletes();
             $table->timestamps();
         });

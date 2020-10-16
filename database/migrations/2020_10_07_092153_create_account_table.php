@@ -15,9 +15,8 @@ class CreateAccountTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('input_kode');
+            $table->string('no_rekening');
             $table->string('nama_bank');
-            $table->integer('no_rekening');
             $table->string('atas_nama');
             $table->SoftDeletes();
             $table->timestamps();

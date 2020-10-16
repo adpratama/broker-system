@@ -18,6 +18,8 @@ class CreateInsuranceTable extends Migration
             $table->string('name');
             $table->string('office');
             $table->string('address');
+            $table->string('kota');
+            $table->string('provinsi');
             $table->string('phone');
             $table->string('email');
             $table->string('pic');
