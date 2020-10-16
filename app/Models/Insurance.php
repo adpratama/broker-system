@@ -25,6 +25,8 @@ class Insurance extends Model
         return $this->hasMany(Quotation::class, 'insurance_id');
     }
 
-    
-    
+    public function kwitansi()
+    {
+        return $this->hasMany(Kwitansi::class, 'insurance_id');
+    }
 }

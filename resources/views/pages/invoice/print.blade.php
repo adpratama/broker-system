@@ -14,7 +14,7 @@
    <div class="container" style="margin-left: 1cm; margin-right: 1cm; font-family:'Segoe UI'; font-size: 11.5px">
       
          <br><br><br><br>
-         <table>
+         <table >
             <tr>
                <td width="410px"><strong>{{$invoice->quotation->insurance->name}}</strong></td>
                <td align="right">Date:</td>
