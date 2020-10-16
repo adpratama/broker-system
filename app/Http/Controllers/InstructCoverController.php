@@ -147,7 +147,7 @@ class InstructCoverController extends Controller
             'status' => 'required|in:UNAPPROVED,APPROVED,REJECTED'
         ]);
 
-        $item = Intruct::findOrFail($id);
+        $item = Instruct::findOrFail($id);
         $item->status = $request->status;
 
         $item->save();

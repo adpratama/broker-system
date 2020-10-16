@@ -12,7 +12,16 @@ class Insurance extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'id', 'name', 'office', 'address', 'phone', 'email', 'pic', 'phone_pic'
+        'id', 
+        'name', 
+        'office', 
+        'address', 
+        'kota',
+        'provinsi',
+        'phone', 
+        'email', 
+        'pic', 
+        'phone_pic'
     ];
 
     public function placing()
@@ -25,6 +34,9 @@ class Insurance extends Model
         return $this->hasMany(Quotation::class, 'insurance_id');
     }
 
-    
+    public function kwitansi()
+    {
+        return $this->hasMany(Kwitansi::class, 'insurance_id');
+    }
     
 }

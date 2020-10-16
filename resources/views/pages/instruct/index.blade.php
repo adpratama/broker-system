@@ -135,10 +135,10 @@
                                  @endif
 
                                  @if ($item->status == 'APPROVED')
-                                    <a href="{{route('instruct.ic', $item->id)}} " 
+                                    {{-- <a href="{{route('instruct.ic', $item->id)}} " 
                                        class="dropdown-item ">
                                        Create Instruct Cover
-                                    </a>
+                                    </a> --}}
                                     <a class="dropdown-item " 
                                        target="_blank"
                                        href="{{route('instruct.print', $item->id)}} ">

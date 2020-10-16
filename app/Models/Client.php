@@ -13,7 +13,15 @@ class Client extends Model
     public $incrementing = false; // fungsi untuk membuat id bertipe string agar tidak terbaca sebagai integer
 
     protected $fillable = [
-        'id', 'name', 'address', 'phone', 'email', 'pic', 'phone_pic'
+        'id',
+        'name', 
+        'address', 
+        'kota',
+        'provinsi',
+        'phone', 
+        'email', 
+        'pic', 
+        'phone_pic'
     ];
 
     protected $hidden = [
@@ -33,5 +41,10 @@ class Client extends Model
     public function quotation()
     {
         return $this->hasMany(Quotation::class, 'client_id');
+    }
+
+    public function kwitansi()
+    {
+        return $this->hasMany(Kwitansi::class, 'client_id');
     }
 }

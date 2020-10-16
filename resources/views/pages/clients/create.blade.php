@@ -81,6 +81,33 @@
                   <div class="form-row">
 
                      <div class="form-group col-md-6">
+                        <label for="kota">Kota</label>
+                        <input type="text" 
+                           class="form-control" 
+                           name="kota" 
+                           id="kota" 
+                           value="{{old('kota')}} @error('kota') is-invalid @enderror ">
+                           @error('kota')
+                              <div class="text-muted">{{ $message}} </div>
+                           @enderror
+                     </div>
+
+                     <div class="form-group col-md-6">
+                        <label for="provinsi">Provinsi</label>
+                        <input type="text" 
+                           class="form-control" 
+                           name="provinsi" 
+                           id="provinsi" 
+                           value="{{old('provinsi')}} @error('provinsi') is-invalid @enderror ">
+                           @error('provinsi')
+                              <div class="text-muted">{{ $message}} </div>
+                           @enderror
+                     </div>
+                  </div>
+
+                  <div class="form-row">
+
+                     <div class="form-group col-md-6">
                         <label for="pic">Nama PIC</label>
                         <input type="text" 
                            class="form-control" 

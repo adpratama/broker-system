@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Placing;
+
 
 class DashboardController extends Controller
 {
@@ -19,6 +21,7 @@ class DashboardController extends Controller
     
     public function index()
     {
+        $placing = Placing::count();
         return view('pages.dashboard.index');
     }
 }

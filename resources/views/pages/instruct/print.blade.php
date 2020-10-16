@@ -4,17 +4,17 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <title>Quotation Slip No. {{$quotation->id}}</title>
+   <title>Instruct Cover No. {{$instruct->id}}</title>
 <!-- Latest compiled and minified CSS -->
    <!-- Latest compiled and minified CSS -->
    <!-- Latest compiled and minified CSS -->
-   <style>
+   {{-- <style>
       td[rowspan] {
          vertical-align: top;
          text-align: left;
       }
 
-   </style>
+   </style> --}}
 
 </head>
 <body 
@@ -25,33 +25,33 @@
       <h4 style=" color:white; text-align: right">
          <strong>
             <span style="background-color: black;">
-               QUOTATION SLIP
+               CLOSING INSTRUCTION
             </span> 
          </strong>
       </h4>
 
       <br>
-      Jakarta, {{$quotation->date}}
+      Jakarta, {{$instruct->date}}
 
       <br><br>
       <strong>
-         {{$quotation->client->name}} <br>
-         {{$quotation->client->address}} <br>
-         {{$quotation->client->kota}}, {{$quotation->client->provinsi}}
+         {{$instruct->insurance->name}} <br>
+         {{$instruct->insurance->address}} <br>
+         {{$instruct->insurance->kota}}, {{$instruct->insurance->provinsi}}
       </strong>
       <br><br>
-      <strong>Up:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>{{$quotation->client->pic}} </u></strong>
+      <strong>Up:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>{{$instruct->insurance->pic}} </u></strong>
 
       <br><br>
-      <h2 style="text-align: center; border-bottom: 1px solid black; border-top: 1px solid black">QUOTATION SLIP NO. {{$quotation->id}} </h2>
+      <h2 style="text-align: center; border-bottom: 1px solid black; border-top: 1px solid black">CLOSING INSTRUCTION NO. {{$instruct->id}} </h2>
 
       <p style="text-align: justify">
-      We thank you for Insurance request and we are pleased to provide Quotation of Insurance with Terms and Conditions (T/C) are: 
+      We thank you for Insurance request and we are pleased to provide instruct of Insurance with Terms and Conditions (T/C) are: 
       </p>
       <p style="background-color: silver; color:black;"><strong>DATA & INFORMATION</strong></p>
 
       <p style="text-align: justify;vertical-align: top;
-      text-align: left;">{!!$quotation->content!!}</p>
+      text-align: left;">{!!$instruct->content!!}</p>
 
       <p style="background-color: silver; color:black;"><strong>FINANCIAL & OTHERS</strong></p>
 
@@ -67,11 +67,11 @@
          </tr>
          <tr>
             <td>COMPENSATION</td>
-            <td>{{$quotation->compensation}} % of Premium</td>
+            <td>{{$instruct->compensation}} % of Premium</td>
          </tr>
          <tr>
             <td>PREMIUM WARRANTY</td>
-            <td>{{$quotation->premium_warranty}} days from Policy Issuance date </td>
+            <td>{{$instruct->premium_warranty}} days from Policy Issuance date </td>
          </tr>
          <tr>
             <td>REMARKS</td>
@@ -88,13 +88,13 @@
                Signed for and on behalf of <br>
                <strong><i>URUN DANA TAKAFUL, PT </i></strong>
                <br><br><br><br><br>
-               <u>{{$quotation->authorize->nama}}</u><br>
-               {{$quotation->authorize->jabatan}}
+               <u>{{$instruct->authorize->nama}}</u><br>
+               {{$instruct->authorize->jabatan}}
             </td>
             <td style="text-align: right">
                <br>
                Noted and Confirmed by <br>
-               <strong><i>{{$quotation->client->name}} </i></strong>
+               <strong><i>{{$instruct->insurance->name}} </i></strong>
                <br><br><br><br><br>
                <u><span style="border-bottom: 1px solid black">       </span></u> <br>
                Authorized Signature

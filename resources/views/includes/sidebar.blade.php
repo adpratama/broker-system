@@ -87,6 +87,12 @@
     </a>
   </li>
   <li>
+    <a class="nav-link" href="{{route('kwitansi.index')}} ">
+      <i class="fas fa-file-invoice"></i> 
+      <span>Kwitansi</span>
+    </a>
+  </li>
+  <li>
     <a class="nav-link" href="credits.html">
       <i class="far fa-file"></i> 
       <span>Report</span>

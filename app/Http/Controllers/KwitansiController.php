@@ -3,27 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Client;
-// use App\Http\Requests\ClientRequest;
 
-class ClientController extends Controller
+use App\Models\Kwitansi;
+use App\Models\Invoice;
+use App\Models\Insurance;
+use App\Models\Client;
+use App\Models\Currency;
+
+use PDF;
+
+class KwitansiController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
         //
-        $items = Client::all();
-        // var_dump($items);
-        return view('pages.clients.index')->with([
+        $items = Kwitansi::all();
+
+        return view('pages.kwitansi.index')->with([
             'items' => $items
         ]);
     }
@@ -33,12 +34,15 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         //
-        $item = 'MIT' . mt_rand(10000,99999) . mt_rand(100,999);
-        return view('pages.clients.create')->with([
-            'item' => $item
+        $insurances = Insurance::all();
+        $clients = Client::all();
+
+        return view('pages.kwitansi.create')->with([
+            'insurances' => $insurances,
+            'clients' => $clients,
         ]);
     }
 
@@ -53,8 +57,8 @@ class ClientController extends Controller
         //
         $data = $request->all();
 
-        Client::create($data);
-        return redirect()->route('clients.index');
+        Kwitansi::create($data);
+        return redirect()->route('kwitansi.index');
     }
 
     /**
@@ -66,10 +70,6 @@ class ClientController extends Controller
     public function show($id)
     {
         //
-        $item = Client::findOrFail($id);
-        return view ('pages.client.show')->with([
-            'item'=>$item
-        ]);
     }
 
     /**
@@ -81,9 +81,9 @@ class ClientController extends Controller
     public function edit($id)
     {
         //
-        $item= Client::findOrFail($id);
+        $item = Kwitansi::findOrFail($id);
 
-        return view('pages.clients.edit')->with([
+        return view('pages.kwitansi.edit')->with([
             'item' => $item
         ]);
     }
@@ -99,10 +99,10 @@ class ClientController extends Controller
     {
         //
         $data = $request->all();
-        $item = Client::findOrFail($id);
-
+        $item = Kwitansi::findOrFail($id);
         $item->update($data);
-        return redirect()->route('clients.index');
+
+        return redirect()->route('kwitansi.index');
     }
 
     /**
@@ -114,5 +114,32 @@ class ClientController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function create_kwitansi($id)
+    {
+        $insurances = Insurance::all();
+        $clients = Client::all();
+        $item = Invoice::findOrFail($id);
+
+        return view('pages.kwitansi.create')->with([
+            'item' => $item,
+            'insurances' => $insurances,
+            'clients' => $clients
+        ]);
+    }
+
+    public function print($id)
+    {
+        $kwitansi = Kwitansi::with(
+            'client',
+            'insurance',
+            'currency'
+        )->findOrFail($id);
+        $html = '<h1>Hello HTML</h1>';
+
+        $pdf = PDF::loadView('pages.kwitansi.print', compact('kwitansi'))->setPaper('a4', 'portrait');
+
+        return $pdf->stream();
     }
 }
