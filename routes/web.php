@@ -45,6 +45,12 @@ Route::get('invoice/{id}/set-status', 'InvoiceController@setStatus')->name('invo
 Route::get('invoice/{id}/print', 'InvoiceController@print')->name('invoice.print');
 Route::get('invoice/{id}/review', 'InvoiceController@review')->name('invoice.review');
 
+// Kwitansi
+Route::resource('kwitansi', 'KwitansiController');
+Route::get('kwitansi/{id}/kwitansi', 'KwitansiController@create_kwitansi')->name('kwitansi.make');
+Route::get('kwitansi/{id}/print', 'KwitansiController@print')->name('kwitansi.print');
+
+
 
 
 

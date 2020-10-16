@@ -53,4 +53,5 @@ class Quotation extends Model
     {
         return $this->belongsTo(AuthorizeSign::class, 'signfor', 'input_kode');
     }
+
 }

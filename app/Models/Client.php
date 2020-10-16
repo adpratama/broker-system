@@ -34,4 +34,9 @@ class Client extends Model
     {
         return $this->hasMany(Quotation::class, 'client_id');
     }
+
+    public function kwitansi()
+    {
+        return $this->hasMany(Kwitansi::class, 'client_id');
+    }
 }

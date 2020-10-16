@@ -23,4 +23,9 @@ class Currency extends Model
     {
         return $this->hasMany(Quotation::class, 'currency_id');
     }
+
+    public function kwitansi()
+    {
+        return $this->hasMany(Kwitansi::class, 'currency_id');
+    }
 }

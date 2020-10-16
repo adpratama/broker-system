@@ -23,4 +23,9 @@ class Invoice extends Model
     {
         return $this->belongsTo(Quotation::class, 'quotation_id', 'id');
     }
+
+    public function kwitansi()
+    {
+        return $this->hasMany(Kwitansi::class, 'invoice_id');
+    }
 }

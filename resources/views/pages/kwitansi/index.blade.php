@@ -20,13 +20,12 @@
                {{-- Card Header --}}
                <div class="card-header">
                   <div class="col-sm-12 col-md-6">
-                     <h4>Daftar Invoice</h4>
+                     <h4>Kwitansi</h4>
                   </div>
                   <div class="col-sm-12 col-md-6">
                      
                   </div>
                </div>
-
                {{-- Card Body --}}
                <div class="card-body">
                   <div class="table-responsive">
@@ -35,9 +34,10 @@
                            <tr>
                            <th>#</th>              
                            <th>Tanggal</th>
-                           <th>Insurance</th>
-                           <th>Insured</th>
-                           <th>Status</th>
+                           <th>Jenis Pembayaran</th>
+                           <th>Nama Bank</th>
+                           <th>Nomor Rekening</th>
+                           <th>Jumlah Pembayaran</th>
                            <th>Aksi</th>
                            </tr>
                         </thead>
@@ -46,11 +46,13 @@
                         
                            <tr>
                         
-                              <td>{{$item->id}} </td>
+                              <td>{{$item->id}}</td>
                               <td>{{$item->date}}</td>
-                              <td>{{$item->quotation->insurance->name}}</td>
-                              <td>{{$item->quotation->client->name }}</td>
-                              <td>
+                              <td>{{$item->jenis_pembayaran}}</td>
+                              <td>{{$item->bankers}}</td>
+                              <td>{{$item->no_rekening}}</td>
+                              <td>{{$item->jumlah_pembayaran}}</td>
+                              {{-- <td>
                                     
                                  @if($item->status == 'UNAPPROVED')
                                     <span class="badge badge-sm" 
@@ -72,7 +74,7 @@
                                     <span>
                                  @endif
                                     {{$item->status}}
-                              </td>
+                              </td> --}}
                               <td>
                                  <div class="dropdown">
                                     <button style="background-color: #3294fe !important; color: #ffffff;"  
@@ -91,62 +93,24 @@
 
                                     <div class="dropdown-menu dropdown-menu-right" 
                                        aria-labelledby="dr1">
-                                       @if($item->status == 'UNAPPROVED')
-                                       <a href="{{ route('invoice.status', $item->id) }}?status=APPROVED" 
-                                          class="dropdown-item ">
-                                          <i class="fe fe-check"></i>
-                                          APPROVE
-                                       </a>
-
-                                       <a href="{{ route('invoice.status', $item->id) }}?status=REJECTED" 
-                                          class="dropdown-item">                                                     
-                                          <i class="fe fe-x"></i>
-                                          REJECT
-                                       </a>
-                                       
                                        <a class="dropdown-item " 
-                                          href="{{route('quotation.edit', $item->id)}} ">
-                                          <i class="fe fe-edit"></i>
-                                          Edit
-                                       </a>
-                                    @endif
-
-                                    @if ($item->status == 'DRAFT')
-                                       <a class="dropdown-item " 
-                                          href="{{route('quotation.edit', $item->id)}} ">
-                                          <i class="fe fe-edit"></i>
-                                          Edit
-                                       </a>
-                                       <a 
-                                          href="#mymodal"
-                                          data-remote="{{ route('invoice.show', $item->id)}}" 
-                                          class="dropdown-item" 
-                                          data-toggle="modal" 
-                                          data-target="#mymodal" 
-                                          data-title="Quotation Slip No. {{ $item->id}}">
-                                          Publish
-                                       </a>
-                                    @endif
-
-                                    @if ($item->status == 'APPROVED')
-                                       <a class="dropdown-item " 
-                                          href="{{route('invoice.review', $item->id)}} "
+                                          href=""
                                           >
                                           <i class="fe fe-file-text"></i>
                                           Preview
                                        </a>
                                        <a class="dropdown-item " 
-                                          href="{{route('kwitansi.make', $item->id)}}">
-                                          <i class="fe fe-edit"></i>
-                                          Kwitansi
-                                       </a>
-                                       <a class="dropdown-item " 
-                                          href="{{route('invoice.print', $item->id)}} "
+                                          href="{{route('kwitansi.print', $item->id)}} "
                                           target="_blank">
                                           <i class="fe fe-file-text"></i>
                                           Cetak
                                        </a>
-                                    @endif
+
+                                       <a class="dropdown-item " 
+                                          href="{{route('kwitansi.edit', $item->id)}}">
+                                          <i class="fe fe-edit"></i>
+                                          Edit
+                                       </a>
                                        
                                     </div>
                                  </div>
@@ -172,7 +136,7 @@
 </section>
 
 @endsection
-
+{{-- 
 @push('after-script')
 <script>
 $("#table-1").dataTable({
@@ -182,4 +146,4 @@ $("#table-1").dataTable({
 });
 </script>
 
-@endpush
+@endpush --}}
